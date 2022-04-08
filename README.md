@@ -20,13 +20,17 @@ echo "export BCS_DIR=$HOME/Documents" >> ~/.zshrc
 ### Commands
 
 ```bash
-bcs start all # will start Apache, ATG, and Kraken respectively
+bcs start all # start Apache, ATG, and Kraken respectively
+
+bcs stop all # stop Apache and ATG (gracefully)
+
+bcs update all # update all the repositories
 ```
 
 For Kraken css:
 
 ```bash
-bcs start kraken-css cc # will run 'npm run watch:cc' in the '$BCS_DIR/bc-frontend/public' folder
+bcs start kraken-css cc # run 'npm run watch:cc' in the '$BCS_DIR/bc-frontend/public' folder
 ```
 
 ### Documentation
