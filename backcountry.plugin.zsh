@@ -23,13 +23,13 @@ function _start-bcs() {
         apache)
             echo "${green}==>${reset} ${bold}Starting ${green}apache${reset}"
             cd $BCS_DIR/atg-apache-configs
-            make start
+            HOSTIP=${HOSTIP:-""} make start
             cd $HOME
             ;;
         apache-logs)
             echo "${green}==>${reset} ${bold}Starting ${green}apache${reset} with logs"
             cd $BCS_DIR/atg-apache-configs
-            make start-logs
+            HOSTIP=${HOSTIP:-""} make start-logs
             cd $HOME
             ;;
         atg)
@@ -78,7 +78,7 @@ function _stop-bcs() {
         apache)
             echo "${green}==>${reset} ${bold}Stopping ${green}apache${reset}"
             cd $BCS_DIR/atg-apache-configs
-            make stop
+            HOSTIP=${HOSTIP:-""} make stop
             cd $HOME
             ;;
         atg)
