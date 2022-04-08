@@ -20,7 +20,7 @@ bcs start all # will start Apache, ATG, and Kraken respectively
 For Kraken css
 
 ```bash
-bcs start kraken-css cc # will run npm run watch:cc inside bc-frontend/public folder
+bcs start kraken-css cc # will run 'npm run watch:cc' in the '$BCS_DIR/bc-frontend/public' folder
 ```
 
 ### Documentation
