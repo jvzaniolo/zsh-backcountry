@@ -2,6 +2,17 @@
 
 A zsh plugin to manage Backcountry's projects.
 
+- [What it does](#what-it-does)
+- [Usage](#usage)
+  - [Commands](#commands)
+  - [Documentation](#documentation)
+- [Installing](#installing)
+  - [zinit](#zinit-recommended)
+  - [Manual](#manual)
+- [Updating](#updating)
+  - [zinit](#zinit)
+  - [Manual](#manual-1)
+
 ## What it does
 
 - Checks to see if your GlobalProtect VPN is connected
@@ -68,4 +79,18 @@ git clone https://github.com/jvzaniolo/zsh-backcountry.git ~
 
 ```bash
 source ~/zsh-backcountry/backcountry.plugin.zsh
+```
+
+## Updating
+
+### zinit
+
+```bash
+zinit update jvzaniolo/zsh-backcountry
+```
+
+### Manual
+
+```
+cd ~/zsh-backcountry; git pull; source ~/.zshrc;
 ```
