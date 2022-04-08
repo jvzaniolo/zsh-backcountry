@@ -40,16 +40,22 @@ bcs start {kraken-css|next} {bcs|cc|moto|sac}
 ### [zinit](https://github.com/zdharma-continuum/zinit) (Recommended)
 
 ```bash
-zinit snippet https://gist.github.com/jvzaniolo/6036a235ea22995765091b04cf33ad25/raw/
+zinit ice wait lucid
+zinit light jvzaniolo/zsh-backcountry
 ```
 
 ### Manual
 
 If you don't use a `zsh` plugin manager, follow these instructions.
 
-- Download this file and rename it to `backcountry.plugin.zsh`
+- Clone this repo
+
+```bash
+git clone https://github.com/jvzaniolo/zsh-backcountry.git ~
+```
+
 - Source it in your `.zshrc` file
 
 ```bash
-source ~/backcountry.plugin.zsh
+source ~/zsh-backcountry/backcountry.plugin.zsh
 ```
