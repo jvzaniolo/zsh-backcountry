@@ -92,5 +92,7 @@ zinit update jvzaniolo/zsh-backcountry
 ### Manual
 
 ```
-cd ~/zsh-backcountry; git pull; source ~/.zshrc;
+cd ~/zsh-backcountry
+git pull
+source ~/.zshrc
 ```
