@@ -178,7 +178,7 @@ function bcs () {
                 ;;
             *)
                 echo "Usage: bcs {start|stop|update} {apache|apache-logs|atg|kraken|all|help}"
-                echo "Usage: bcs start {kraken-css|next} {bcs|cc|moto|sac}
+                echo "Usage: bcs start {kraken-css|next} {bcs|cc|moto|sac}"
                 ;;
         esac
     fi
