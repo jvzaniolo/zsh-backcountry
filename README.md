@@ -1,6 +1,6 @@
 # zsh-backcountry
 
-A zsh plugin to manage Backcountry's projects
+A zsh plugin to manage Backcountry's projects.
 
 ## Usage
 
@@ -17,7 +17,7 @@ echo "export BCS_DIR=$HOME/Documents" >> ~/.zshrc
 bcs start all # will start Apache, ATG, and Kraken respectively
 ```
 
-For Kraken css
+For Kraken css:
 
 ```bash
 bcs start kraken-css cc # will run 'npm run watch:cc' in the '$BCS_DIR/bc-frontend/public' folder
@@ -29,7 +29,7 @@ bcs start kraken-css cc # will run 'npm run watch:cc' in the '$BCS_DIR/bc-fronte
 bcs {start|stop|update} {apache|apache-logs|atg|kraken|all|help}
 ```
 
-To start the `kraken-css` and `next` commands you need to pass a third parameter for `<site>`
+To start the `kraken-css` and `next` commands you need to pass a third parameter for `<site>`:
 
 ```bash
 bcs start {kraken-css|next} {bcs|cc|moto|sac}
