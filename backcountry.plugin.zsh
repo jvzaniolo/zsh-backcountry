@@ -41,35 +41,26 @@ function _start-bcs() {
         kraken)
             echo "${green}==>${reset} ${bold}Starting ${green}kraken${reset} (bc-frontend)"
             cd $BCS_DIR/bc-frontend
-            if command -v nvm &> /dev/null; then
-                nvm use
-            fi
+            nvm use
             echo "${green}==>${reset} ${bold}Navigate to public folder and run 'npm run watch:<site>' to compile the css"
             node server.js
             ;;
         kraken-css)
             echo "${green}==>${reset} ${bold}Starting ${green}kraken-css${reset} (bc-frontend/public)"
             cd $BCS_DIR/bc-frontend/public
-            if command -v nvm &> /dev/null; then
-                nvm use
-            fi
+            nvm use
             npm run watch:$2
             ;;
         next)
             echo "${green}==>${reset} ${bold}Starting ${green}next${reset} (bc-frontend-web)"
             cd $BCS_DIR/bc-frontend-web
-            if command -v nvm &> /dev/null; then
-                nvm use
-            fi
+            nvm use
             yarn dev:$2
             ;;
         all)
             bcs start apache
             bcs start atg
             bcs start kraken
-            if command -v nvm &> /dev/null; then
-                nvm use default 
-            fi
             ;;
         help)
             echo "Usage: bcs start {apache|apache-logs|atg|kraken|kraken-css|next|all|help}"
