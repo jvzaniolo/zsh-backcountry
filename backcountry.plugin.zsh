@@ -17,8 +17,29 @@ export WEB_ASSETS_PATH=${BCS_DIR:-$HOME/Developer}/bc-frontend
 export BC_APACHE_HOME=${BCS_DIR:-$HOME/Developer}/atg-apache-configs
 export ATG_HOME=/opt/atg/atg11.3.2
 
+function _check-vpn() {
+    if ! curl -Is http://integration.backcountry.com | grep 301 &> /dev/null; then
+        echo "${red}==>${reset} ${bold}Please connect to GlobalProtect VPN"
+        return 1
+    fi
+
+    return 0
+}
+
+function _check-nvm() {
+    if ! command -v nvm &> /dev/null; then
+        echo "${red}==>${reset} ${bold}Please install ${green}nvm"
+        return 1
+    fi
+
+    return 0
+}
+
 function _start-bcs() {
     BCS_DIR=${BCS_DIR:-$HOME/Developer}
+    if ! _check-vpn; then
+        return
+    fi
     case $1 in
         apache)
             echo "${green}==>${reset} ${bold}Starting ${green}apache${reset}"
@@ -40,6 +61,9 @@ function _start-bcs() {
             ;;
         kraken)
             echo "${green}==>${reset} ${bold}Starting ${green}kraken${reset} (bc-frontend)"
+            if ! _check-nvm; then
+                return
+            fi
             cd $BCS_DIR/bc-frontend
             nvm use
             echo "${green}==>${reset} ${bold}Navigate to public folder and run 'npm run watch:<site>' to compile the css"
@@ -47,17 +71,27 @@ function _start-bcs() {
             ;;
         kraken-css)
             echo "${green}==>${reset} ${bold}Starting ${green}kraken-css${reset} (bc-frontend/public)"
-            cd $BCS_DIR/bc-frontend/public
+            echo "==> npm run watch:$2"
+            if ! _check-nvm; then
+                return
+            fi
             nvm use
             npm run watch:$2
             ;;
         next)
             echo "${green}==>${reset} ${bold}Starting ${green}next${reset} (bc-frontend-web)"
             cd $BCS_DIR/bc-frontend-web
+            echo "==> yarn dev:$2"
+            if ! _check-nvm; then
+                return
+            fi
             nvm use
             yarn dev:$2
             ;;
         all)
+            if ! _check-nvm; then
+                return
+            fi
             bcs start apache
             bcs start atg
             bcs start kraken
@@ -123,6 +157,13 @@ function _update-bcs() {
         kraken)
             echo "${green}==>${reset} ${bold}Updating ${green}kraken${reset} (bc-frontend)"
             cd $BCS_DIR/bc-frontend
+            # Remove this once bc-frontend is migrated to GitHub
+            if git remote get-url origin | grep bcinfra &> /dev/null; then
+                if ! _check-vpn; then
+                    return
+                fi
+            fi
+            #
             git pull
             cd $HOME
             ;;
@@ -133,10 +174,10 @@ function _update-bcs() {
             cd $HOME
             ;;
         all)
+            bcs update next
             bcs update apache
             bcs update atg
             bcs update kraken
-            bcs update next
             ;;
         help)
             echo "Usage: bcs update {apache|atg|kraken|next|all|help}"
@@ -152,25 +193,20 @@ function bcs () {
     if [[ ! -v BCS_DIR ]]; then
         echo "${yellow}==>${reset} BCS_DIR is not defined. Using '\$HOME/Developer' instead."
     fi
-    if ! curl -Is http://integration.backcountry.com | grep 301 &> /dev/null; then
-        echo "${red}==>${reset} ${bold}Please connect to the Backcountry VPN"
-    elif ! command -v nvm &> /dev/null; then
-        echo "${red}==>${reset} ${bold}Please install ${green}nvm"
-    else
-        case $1 in
-            start)
-                _start-bcs $2 $3
-                ;;
-            stop)
-                _stop-bcs $2
-                ;;
-            update)
-                _update-bcs $2
-                ;;
-            *)
-                echo "Usage: bcs {start|stop|update} {apache|apache-logs|atg|kraken|all|help}"
-                echo "Usage: bcs start {kraken-css|next} {bcs|cc|moto|sac}"
-                ;;
-        esac
-    fi
+
+    case $1 in
+        start)
+            _start-bcs $2 $3
+            ;;
+        stop)
+            _stop-bcs $2
+            ;;
+        update)
+            _update-bcs $2
+            ;;
+        *)
+            echo "Usage: bcs {start|stop|update} {apache|apache-logs|atg|kraken|all|help}"
+            echo "Usage: bcs start {kraken-css|next} {bcs|cc|moto|sac}"
+            ;;
+    esac
 }
