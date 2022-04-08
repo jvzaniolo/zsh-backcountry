@@ -15,7 +15,8 @@ A zsh plugin to manage Backcountry's projects.
 
 ## What it does
 
-- Checks to see if your GlobalProtect VPN is connected
+- Adds all the [environment variables](https://github.com/Backcountry/atg-atg-backcountry-ca#environment-variables) for you (you can override `$JAVA_HOME` if you like)
+- Checks to see if your GlobalProtect VPN is connected when necessary
 - Runs `nvm use` inside projects that need it
 - Offers several commands to help you be more productive
 
