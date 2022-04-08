@@ -2,6 +2,12 @@
 
 A zsh plugin to manage Backcountry's projects.
 
+## What it does
+
+- Checks if your VPN is connected to Backcountry
+- Runs `nvm use` inside projects that need it
+- Offers several commands to help you be more productive
+
 ## Usage
 
 Define `$BCS_DIR` variable to the path where you cloned the Backcountry repositories.
