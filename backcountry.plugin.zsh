@@ -87,16 +87,17 @@ function _start-bcs() {
         if ! _check-nvm; then
             return
         fi
+        cd $BCS_DIR/bc-frontend/public
         nvm use
         npm run watch:$2
         ;;
     next)
         echo "${green}==>${reset} ${bold}Starting ${green}next${reset} (bc-frontend-web)"
-        cd $BCS_DIR/bc-frontend-web
-        echo "==> yarn dev:$2"
         if ! _check-nvm; then
             return
         fi
+        echo "==> yarn dev:$2"
+        cd $BCS_DIR/bc-frontend-web
         nvm use
         yarn dev:$2
         ;;
