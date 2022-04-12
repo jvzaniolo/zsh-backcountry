@@ -209,6 +209,45 @@ function _update-bcs() {
     esac
 }
 
+function _code-bcs() {
+    BCS_DIR=${BCS_DIR:-$HOME/Developer}
+
+    if [[ ! command -v code ]]
+    then
+        echo "${red}==>${reset} ${bold}code${reset} command not found."
+        return
+    fi
+
+    case $1 in
+    apache)
+        echo "${green}==>${reset} ${bold}Opening ${green}apache${reset} in vscode"
+        code $BCS_DIR/atg-apache-configs
+        cd $HOME
+        ;;
+    atg)
+        echo "${green}==>${reset} ${bold}Opening ${green}atg${reset} in vscode"
+        code $BCS_DIR/atg-backcountry-ca
+        cd $HOME
+        ;;
+    kraken)
+        echo "${green}==>${reset} ${bold}Opening ${green}kraken${reset} (bc-frontend) in vscode"
+        code $BCS_DIR/bc-frontend
+        cd $HOME
+        ;;
+    next)
+        echo "${green}==>${reset} ${bold}Opening ${green}next${reset} (bc-frontend-web) in vscode"
+        code $BCS_DIR/bc-frontend-web
+        cd $HOME
+        ;;
+    help)
+        echo "Usage: bcs code {apache|atg|kraken|next|help}"
+        ;;
+    *)
+        bcs code help
+        ;;
+    esac
+}
+
 function bcs() {
     if [[ ! -v BCS_DIR ]]; then
         echo "${yellow}==>${reset} BCS_DIR is not defined. Using '\$HOME/Developer' instead."
@@ -224,8 +263,11 @@ function bcs() {
     update)
         _update-bcs $2
         ;;
+    code)
+        _code-bcs $2
+        ;;
     *)
-        echo "Usage: bcs {start|stop|update} {apache|apache-logs|atg|kraken|all|help}"
+        echo "Usage: bcs {start|stop|update|code} {apache|apache-logs|atg|kraken|all|help}"
         echo "Usage: bcs start {kraken-css|next} {bcs|cc|moto|sac}"
         ;;
     esac
