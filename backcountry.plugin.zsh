@@ -212,8 +212,7 @@ function _update-bcs() {
 function _code-bcs() {
     BCS_DIR=${BCS_DIR:-$HOME/Developer}
 
-    if [[ ! command -v code ]]
-    then
+    if ! command -v nvm &>/dev/null ; then
         echo "${red}==>${reset} ${bold}code${reset} command not found."
         return
     fi
