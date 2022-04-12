@@ -37,6 +37,8 @@ bcs start all # start Apache, ATG, and Kraken respectively
 bcs stop all # stop Apache and ATG (gracefully)
 
 bcs update all # update all the repositories
+
+bcs code next # open (bc-frontend-dev) in vscode
 ```
 
 For Kraken css:
