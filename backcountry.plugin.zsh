@@ -8,7 +8,7 @@ bold=$(tput bold)
 
 export PATH="/usr/local/opt/openjdk@8/bin:$PATH"
 
-export JAVA_HOME=${JAVA_HOME:-$(/usr/libexec/java_home -v 1.8.0_311)}
+[[ -f /usr/libexec/java_home ]] && export JAVA_HOME=${JAVA_HOME:-$(/usr/libexec/java_home -v 1.8.0_311)}
 export ATGJRE=$JAVA_HOME/bin/java
 export DYNAMO_HOME=/opt/atg/atg11.3.2/home
 export JAVA_VM=$JAVA_HOME/bin/java
