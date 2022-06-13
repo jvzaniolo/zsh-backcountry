@@ -27,7 +27,7 @@ function _check-vpn() {
 }
 
 function _check-node-manager() {
-    if ! command -v nvm &>/dev/null | ! command -v fnm &>/dev/null;; then
+    if ! command -v nvm &>/dev/null || ! command -v fnm &>/dev/null; then
         echo "${red}==>${reset} ${bold}Please install ${green}nvm ${reset}or ${green}fnm"
         return 1
     fi
@@ -212,7 +212,7 @@ function _update-bcs() {
 function _code-bcs() {
     BCS_DIR=${BCS_DIR:-$HOME/Developer}
 
-    if ! command -v nvm &>/dev/null ; then
+    if ! command -v nvm &>/dev/null; then
         echo "${red}==>${reset} ${bold}code${reset} command not found."
         return
     fi
