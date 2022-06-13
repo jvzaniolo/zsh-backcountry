@@ -26,9 +26,9 @@ function _check-vpn() {
     return 0
 }
 
-function _check-nvm() {
-    if ! command -v nvm &>/dev/null; then
-        echo "${red}==>${reset} ${bold}Please install ${green}nvm"
+function _check-node-manager() {
+    if ! command -v nvm &>/dev/null | ! command -v fnm &>/dev/null;; then
+        echo "${red}==>${reset} ${bold}Please install ${green}nvm ${reset}or ${green}fnm"
         return 1
     fi
 
