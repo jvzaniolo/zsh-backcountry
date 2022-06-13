@@ -73,36 +73,33 @@ function _start-bcs() {
         ;;
     kraken)
         echo "${green}==>${reset} ${bold}Starting ${green}kraken${reset} (bc-frontend)"
-        if ! _check-nvm; then
+        if ! _check-node-manager; then
             return
         fi
         cd $BCS_DIR/bc-frontend
-        nvm use
         echo "${green}==>${reset} ${bold}Navigate to public folder and run 'npm run watch:<site>' to compile the css"
         node server.js
         ;;
     kraken-css)
         echo "${green}==>${reset} ${bold}Starting ${green}kraken-css${reset} (bc-frontend/public)"
         echo "==> npm run watch:$2"
-        if ! _check-nvm; then
+        if ! _check-node-manager; then
             return
         fi
         cd $BCS_DIR/bc-frontend/public
-        nvm use
         npm run watch:$2
         ;;
     next)
         echo "${green}==>${reset} ${bold}Starting ${green}next${reset} (bc-frontend-web)"
-        if ! _check-nvm; then
+        if ! _check-node-manager; then
             return
         fi
         echo "==> yarn dev:$2"
         cd $BCS_DIR/bc-frontend-web
-        nvm use
         yarn dev:$2
         ;;
     all)
-        if ! _check-nvm; then
+        if ! _check-node-manager; then
             return
         fi
         bcs start apache
@@ -212,7 +209,7 @@ function _update-bcs() {
 function _code-bcs() {
     BCS_DIR=${BCS_DIR:-$HOME/Developer}
 
-    if ! command -v nvm &>/dev/null; then
+    if ! command -v code &>/dev/null; then
         echo "${red}==>${reset} ${bold}code${reset} command not found."
         return
     fi
